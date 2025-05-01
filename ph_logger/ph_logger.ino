@@ -12,6 +12,7 @@ SoftwareSerial phSerial(PH_RX, PH_TX);
 RTC_DS3231 rtc;
 bool rtcPresent = false;
 
+// CHANGE TIME HERE FOR DIFFERENT INTERVAL (in MS, so 1800000 = 30 min)
 const unsigned long READ_INTERVAL_MS = 5000;
 unsigned long lastRead = 0;
 
@@ -27,6 +28,7 @@ void setup() {
   if (!SD.begin(SD_CS)) {
     Serial.println("SD init failed"); while (1);
   }
+  // CHANGE FILE NAME HERE FOR DIFFERENT FILE ex: "site1.csv"
   logfile = SD.open("datalog.csv", FILE_WRITE);
   if (!logfile) { Serial.println("Can't open datalog.csv"); while (1); }
   if (logfile.size() == 0) {                       // new file → header
